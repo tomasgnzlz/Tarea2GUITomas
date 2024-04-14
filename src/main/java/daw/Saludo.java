@@ -5,12 +5,14 @@
 package daw;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.border.TitledBorder;
 
 /**
  *
@@ -18,7 +20,8 @@ import javax.swing.JTextArea;
  */
 public class Saludo extends JPanel implements ActionListener {
 
-    private JButton botonSaludar;
+    private JButton botonNombre;
+    private JButton botonApellidos;
     private JTextArea texto;
 
     public Saludo() {
@@ -27,44 +30,35 @@ public class Saludo extends JPanel implements ActionListener {
 
     private void initComponents() {
 
-        botonSaludar = new JButton("Saludar");
+        this.setPreferredSize(new Dimension(600, 200));
+
+        botonNombre = new JButton("Nombre");
+        botonApellidos = new JButton("Apellidos");
+
         texto = new JTextArea(1, 25);
-        texto.setBackground(Color.ORANGE);
+        texto.setBackground(Color.BLUE);
 
         this.setLayout(new FlowLayout());
 
-        this.add(botonSaludar);
+        this.add(botonNombre);
+        this.add(botonApellidos);
         this.add(texto);
 
-        // Se le indica al objeto boton que escuche eventos tipo click
-        // y se pasa como argumento una referencia de tipo ActionListener
-        // En este caso se pasa this que es el panel sobre el 
-        // que está el botón y que implementa la interfaz ActionListener
-        botonSaludar.addActionListener(this);
+        botonNombre.addActionListener(this);
+        botonApellidos.addActionListener(this);
 
     }
 
     @Override
-    // Sobrescribimos el método de la interfaz
-    public void actionPerformed(ActionEvent ae) {
+    public void actionPerformed(ActionEvent a) {
 
-        // Si el botón pulsado es botonSaludar
-        if (ae.getSource() == botonSaludar) {
-            texto.setText("Hola amigos!!");
+        if (a.getSource() == botonNombre) {
+            texto.setBackground(Color.ORANGE);
+            texto.setText("Tomás");
         } else {
-            texto.setText("Adios amigos!!");
+            texto.setBackground(Color.CYAN);
+            texto.setText("González Atienza");
         }
     }
 
-    // Clase anónima (sin nombre) anidada (dentro de un método)
-    botonSaludar.addActionListener ( 
-        new ActionListener() {
-    @Override
-        public void actionPerformed
-        (ActionEvent e
-        
-            ) {
-            		texto.setText("Hola Amigos!!");
-        }
-
-    }
+}
